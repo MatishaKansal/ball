@@ -1,25 +1,46 @@
-class Ball{
-    constructor(x, y){
-        var options = {
-            isStatic: false,
-            restitution: 1,
-            friction: 0,
-            density: 0.8,
-          };
-          this.x = x;
-          this.y = y;
-          this.radius = 20;
-          this.body = Bodies.circle(x, y, this.radius / 2, options);
-          World.add(world, this.body);
-        }
-      
-        display() {
-          var pos = this.body.position;
-          push();
-          translate(pos.x, pos.y);
-          rectMode(CENTER);
-          fill("purple");
-          ellipse(0, 0, 20);
-          pop();
-        }
+//bubble variables
+var bb;
+var bbVel;
+var bbSize;
+
+function updateBubbles() {
+  touch = false;
+  for (var i = 0; i < bb.length; i++) {
+      push();
+
+      //bubble collisions 
+      if (dist(bb[i].x, bb[i].y, p.x, p.y) < bbSize / 2) {
+          touch = true;
+          console.log(touch);
       }
+      //update bb locations
+      bb[i].add(bbVel[i]);
+
+      //contain bb
+      //contain player
+      if (bb[i].x > width + bbSize / 2) {
+          bb[i].x = 0
+      }
+      if (bb[i].x < -bbSize / 2) {
+          bb[i].x = 400
+      }
+      if (bb[i].y > height + bbSize / 2) {
+          bb[i].y = 0
+      }
+      if (bb[i].y < -bbSize / 2) {
+          bb[i].y = 400
+      }
+
+      fill("pink")
+      stroke(255);
+      ellipse(bb[i].x, bb[i].y, bbSize);
+      pop();
+  }
+  if (touch == true) {
+      playerColor = color(255, 0,);
+      Health--;
+  } else {
+      playerColor = color(210);
+  }
+
+  }

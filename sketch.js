@@ -9,34 +9,37 @@ var circle1;
 function setup(){
  createCanvas(400, 400);
 
-  engine = Engine.create();
-  world = engine.world;
+    p = createVector(width / 2, height / 2)
+    pVel = createVector(0, 0);
+    force = createVector(0, 0);
+    size = 10;
+    heading = 0;
+    boostColor = color(0, 255, 0);
+    playerColor = color(255);
+    Score = 0;
+    Health = 200;
+    bb = [];
+    bbVel = [];
+    bbSize = 105;
 
-  circle1 = new Ball(Math.round(random(0,400)), Math.round(random(0,400)));
-
-  circle2 = new Ball(Math.round(random(0,400)), Math.round(random(0,400)));
-  
-  circle3 = new Ball(Math.round(random(0,400)), Math.round(random(0,400)));
-
-  circle4 = new Ball(Math.round(random(0,400)), Math.round(random(0,400)));
-
-  circle5 = new Ball(Math.round(random(0,400)), Math.round(random(0,400)));
-
-  circle6 = new Ball(Math.round(random(0,400)), Math.round(random(0,400)));
-
-  circle7 = new Ball(Math.round(random(0,400)), Math.round(random(0,400)));
-
-  Engine.run(engine);
+    for (var i = 0; i < 5; i++) {
+        bb.push(createVector(random(0, width), random(0, height)));
+        bbVel.push(p5.Vector.random2D().mult(random(5.25, 10.25)));
+    }
 }
 
 
 function draw(){
   background(0);
-circle1.display();
-circle2.display();
-circle3.display();
-circle4.display();
-circle5.display();
-circle6.display();
-circle7.display();
+// circle1.display();
+// circle2.display();
+// circle3.display();
+// circle4.display();
+// circle5.display();
+// circle6.display();
+// circle7.display();
+
+updatePlayer();
+updateBubbles();
+updateLasers();
 }
